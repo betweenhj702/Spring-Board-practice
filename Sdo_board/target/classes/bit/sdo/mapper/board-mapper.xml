@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="bit.sdo.mapper.BoardMapper">
+  		<insert id="insert" parameterType="Board">
+  			<selectKey keyProperty="seq" order="BEFORE" resultType="long">
+  				select BOARD_SEQ.nextval from dual
+  			</selectKey>
+  			insert into BOARD values(#{seq},#{writer},#{email},#{subject},#{content},
+  			SYSDATE,#{cnt},#{refer},#{lev},#{place})
+  		</insert>
+  		<select id="getMaxRef" resultType="long">
+  			select NVL(Max(REFER),0) from BOARD
+  		</select>
+  		<select id="list" parameterType="BoardVo" resultType="Board">
+  			<![CDATA[
+  			select * from (select ROWNUM rnum, aa.* from 
+  			(select * from BOARD order by REFER desc, PLACE asc) aa)
+			where rnum>#{startRow} and rnum<=#{endRow}
+			]]>
+  		</select>
+  		<select id="getTotalCount" resultType="long">
+  			select count(SEQ) from BOARD
+  		</select>
+  		<update id="setCnt" parameterType="long">
+  			update BOARD set CNT = CNT + 1 where SEQ = #{seq}
+  		</update>
+		<select id="getContent" parameterType="long" resultType="Board">
+			select * from BOARD where SEQ = #{seq}
+		</select>  		
+		<delete id="delete" parameterType="long">
+			delete from BOARD where SEQ = #{seq}
+		</delete>
+		<update id="update" parameterType="Board">
+			update BOARD set EMAIL=#{email}, SUBJECT=#{subject}, CONTENT=#{content} where SEQ = #{seq}
+		</update>
+		
+		<!-- BDFILE table -->
+		<insert id="insertFileInfo" parameterType="BdFile">
+  			insert into BDFILE values(BDFILE_SEQ.nextval,#{b_seq},#{fname},#{ofname},#{fsize})
+  		</insert>
+		
+  </mapper>

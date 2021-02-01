@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="bit.sdo.mapper.BoardMapper">
+  		<insert id="insertFileInfo" parameterType="BdFile">
+  			insert into BDFILE values(BDFILE_SEQ.nextval,#{b_seq},#{fname},#{ofname},#{fsize})
+  		</insert>
+  		<select id="getMaxRef" resultType="long">
+  			select NVL(Max(REFER),0) from BOARD
+  		</select>
+  		<update id="setCnt" parameterType="long">
+  			update BOARD set CNT = CNT + 1 where SEQ = #{seq}
+  		</update>
+		<delete id="delete" parameterType="long">
+			delete from BOARD where SEQ = #{seq}
+		</delete>
+		
+  </mapper>
