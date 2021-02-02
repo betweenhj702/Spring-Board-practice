@@ -43,28 +43,28 @@
 </center>
 
 <form name='input' method='post' action='update.do'>
-<input type="hidden" name="seq" value="${board.seq}">
+<input type="hidden" name="seq" value="${contentResult.board.seq}">
 <table border='0' width='600' align='center' cellpadding='3' cellspacing='1' bordercolor='gray'>	
 <tr>
    <td width='20%' align='center' >WRITER</td>
    <td>
-      <input name='writer' readonly value='${board.writer}'/>
+      <input name='writer' readonly value='${contentResult.board.writer}'/>
    </td>
 </tr>
 
 <tr>
 	<td align='center'>EMAIL</td>
-	<td><input name='email' value='${board.email}'/></td>
+	<td><input name='email' value='${contentResult.board.email}'/></td>
 </tr>
 
 <tr>
 	<td align='center'>SUBJECT</td>
-	<td><input name='subject' value='${board.subject}'/></td>
+	<td><input name='subject' value='${contentResult.board.subject}'/></td>
 </tr>
 			
 <tr>
 	<td align='center'>CONTENT</td>
-	<td><textarea id='ta' name='content' rows='15' cols='70'>${board.content}</textarea></td>
+	<td><textarea id='ta' name='content' rows='15' cols='70'>${contentResult.board.content}</textarea></td>
 </tr>
 <tr>
 	 <td colspan='2' align='center'>

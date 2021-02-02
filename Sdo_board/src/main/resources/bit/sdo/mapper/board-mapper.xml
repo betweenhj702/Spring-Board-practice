@@ -37,9 +37,9 @@
 			update BOARD set EMAIL=#{email}, SUBJECT=#{subject}, CONTENT=#{content} where SEQ = #{seq}
 		</update>
 		
-		<!-- BDFILE table -->
+		<!-- BDFILE table 
 		<insert id="insertFileInfo" parameterType="BdFile">
   			insert into BDFILE values(BDFILE_SEQ.nextval,#{b_seq},#{fname},#{ofname},#{fsize})
-  		</insert>
+  		</insert>-->
 		
   </mapper>

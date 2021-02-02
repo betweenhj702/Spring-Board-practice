@@ -10,5 +10,6 @@
    </typeAliases>
    <mappers>
    	   <mapper resource="bit/sdo/mapper/board-mapper.xml"/>
+   	   <mapper resource="bit/sdo/mapper/bdfile-mapper.xml"/>
    </mappers>
 </configuration>

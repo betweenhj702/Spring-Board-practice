@@ -17,4 +17,5 @@ public interface BoardMapper {
 	void update(Board board);
 	//
 	void insertFileInfo(BdFile bdFile);
+	List<BdFile> getFileInfo(long seq);
 }

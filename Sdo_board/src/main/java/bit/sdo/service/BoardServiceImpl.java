@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import bit.sdo.domain.BdFile;
 import bit.sdo.domain.Board;
+import bit.sdo.domain.BoardContentResult;
 import bit.sdo.domain.BoardListResult;
 import bit.sdo.domain.BoardVo;
 import bit.sdo.mapper.BoardMapper;
@@ -32,10 +33,11 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public Board getContent(long seq) {
+	public BoardContentResult getContent(long seq) {
 		boardMapper.setCnt(seq);
 		Board board = boardMapper.getContent(seq);
-		return board;
+		List<BdFile> list = boardMapper.getFileInfo(seq);
+		return new BoardContentResult(board, list);
 	}
 
 	@Override

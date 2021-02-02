@@ -1,5 +1,6 @@
 package bit.sdo.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import bit.sdo.domain.Board;
+import bit.sdo.domain.BoardContentResult;
 import bit.sdo.domain.BoardListResult;
+import bit.sdo.filesetting.Path;
 import bit.sdo.service.BoardService;
 import lombok.extern.log4j.Log4j;
 
@@ -80,7 +83,7 @@ public class BoardController {
 			mv.setViewName("redirect:list.do?cp="+(cp-1));
 			return mv;
 		}else {
-			log.info(listResult);
+			//log.info(listResult);
 			mv.setViewName("board/list");
 			mv.addObject("listResult", listResult);
 			return mv;
@@ -94,15 +97,12 @@ public class BoardController {
 	@PostMapping("write.do")
 	public String write(Board board, @RequestParam ArrayList<MultipartFile> files) {
 		service.write(board, files);
-		
-		//
-		
 		return "redirect:list.do";
 	}
 	@GetMapping("content.do")
 	public ModelAndView getContent(long seq) {
-		Board board = service.getContent(seq);
-		return new ModelAndView("board/content","board", board);
+		BoardContentResult contentResult = service.getContent(seq);
+		return new ModelAndView("board/content","contentResult", contentResult);
 	}
 	@GetMapping("del.do")
 	public String remove(long seq) {
@@ -111,12 +111,22 @@ public class BoardController {
 	}
 	@GetMapping("update.do")
 	public ModelAndView edit(long seq) {
-		Board board = service.getContent(seq);
-		return new ModelAndView("board/update","board",board);
+		BoardContentResult contentResult = service.getContent(seq);
+		return new ModelAndView("board/content","contentResult", contentResult);
 	}
 	@PostMapping("update.do")
 	public String edit(Board board) {
 		service.edit(board);
 		return "redirect:content.do?seq="+ board.getSeq();
+	}
+	@GetMapping("download.do")
+	public ModelAndView download(@RequestParam String fname) {
+		File file = new File(Path.FILE_STORE, fname);
+		if(file.exists()) {
+			return new ModelAndView("fileDownloadView","downloadFile", file);
+		}else {
+			return new ModelAndView("redirect:list.do");
+		}
+		
 	}
 }

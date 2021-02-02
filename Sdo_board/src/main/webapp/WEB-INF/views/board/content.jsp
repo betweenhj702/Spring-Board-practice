@@ -26,33 +26,44 @@
 	<table border='2' width='600' align='center' noshade>
 	<tr>
 	<td width='20%' align='center'>No</td>
-	<td>${board.seq}</td>
+	<td>${contentResult.board.seq}</td>
 	<td width='20%' align='center'>Count</td>
-	<td>${board.cnt}</td>
+	<td>${contentResult.board.cnt}</td>
 	</tr>
 	<tr>
 	<td width='20%' align='center'>Writer</td>
-	<td colspan="3">${board.writer}</td>
+	<td colspan="3">${contentResult.board.writer}</td>
 	</tr>
 	<tr>
 	<td align='center'>E-mail</td>
-	<td colspan="3">${board.email}</td>
+	<td colspan="3">${contentResult.board.email}</td>
 	</tr>
 	<tr>
 	<td align='center'>Subject</td>
-	<td colspan="3">${board.subject}</td>
+	<td colspan="3">${contentResult.board.subject}</td>
 	</tr>
+	<c:if test="${!empty contentResult.list}">
+		<tr>
+			<td align='center'>File</td>
+			<td colspan="3">
+				<c:forEach items="${contentResult.list}" var="bdfile">
+					<a href="download.do?fname=${bdfile.fname}">${bdfile.fname}</a> &nbsp;
+					 ${bdfile.fsize}Byte &nbsp;<br>
+				</c:forEach>
+			</td>
+		</tr>
+	</c:if>
 	<tr>
 	<td align='center'>Contents</td>
-	<td colspan="3">${board.content}</td>
+	<td colspan="3">${contentResult.board.content}</td>
 	</tr>
 	</table>
 	
 	<hr width='600' size='2' color='gray' noshade>
 	<font color='gray' size='4' face='휴먼편지체'>
-	<a href='update.do?seq=${board.seq}'>수정</a>
+	<a href='update.do?seq=${contentResult.board.seq}'>수정</a>
 	 &nbsp;&nbsp;| 
-	<a href='del.do?seq=${board.seq}'>삭제</a>
+	<a href='del.do?seq=${contentResult.board.seq}'>삭제</a>
 	 &nbsp;&nbsp;| 
 	<a href='list.do'>목록</a>
 	</font>
