@@ -19,7 +19,7 @@ public class JdbcTests {
 		}catch(ClassNotFoundException cnfe) {
 			log.info("#오라클 드라이버 인식 실패");
 		}
-	}
+	} 
 	
 	@Test
 	public void testConnectionJdbc() {
