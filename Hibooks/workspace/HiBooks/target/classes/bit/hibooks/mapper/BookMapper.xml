@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="bit.hibooks.mapper.BookMapper">
+  	<insert id="insertBookInfo" parameterType="Book">
+  		insert into BOOK values(BOOK_SEQ.nextval, #{b_itemId},#{b_title},#{b_img},#{b_rate},#{b_writer},#{b_publisher},#{b_price},#{b_desc})
+  	</insert>
+  </mapper>

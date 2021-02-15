@@ -12,4 +12,6 @@ import lombok.NoArgsConstructor;
 public class BoardContentResult {
 	private Board board;
 	private List<BdFile> list;
+	
+	
 }

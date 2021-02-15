@@ -5,9 +5,11 @@
 
   <mapper namespace="bit.sdo.mapper.BoardMapper">
   		<insert id="insert" parameterType="Board">
+  			
   			<selectKey keyProperty="seq" order="BEFORE" resultType="long">
   				select BOARD_SEQ.nextval from dual
   			</selectKey>
+  			
   			insert into BOARD values(#{seq},#{writer},#{email},#{subject},#{content},
   			SYSDATE,#{cnt},#{refer},#{lev},#{place})
   		</insert>
